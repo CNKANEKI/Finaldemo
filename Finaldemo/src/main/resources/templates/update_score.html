@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="ISO-8859-1">
+    <title>成绩管理</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>修改成绩</h1>
+    <form action="#" th:action="@{/saveScore}" th:object="${score}" method="POST">
+
+        <input type="hidden" th:field="*{id.sid}" />
+
+        <input type="hidden" th:field="*{id.course}">
+
+        <input type="text" th:field="*{grade}" class="form-control mb-4 col-4">
+
+        <button type="submit" class="btn btn-info col-2"> 更改</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/showStuScore/{id}(id=${score.id.sid})}"> 返回列表</a>
+</div>
+</body>
+
+</html>

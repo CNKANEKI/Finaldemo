@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 使页面响应式 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>成绩管理</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="text-center">学生成绩</h1>
+
+    <div th:if="${ScoreList != null}">
+        <h2>成绩信息</h2>
+        <hr>
+        <a th:href="@{/showScoreAdd/{id}(id=${sid})}" class="btn btn-primary mb-3">新增成绩</a>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>课程</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="score : ${ScoreList}">
+                <td th:text="${score.id.course}">课程名称</td>
+                <td th:text="${score.grade}">分数</td>
+                <td>
+                    <a th:href="@{/showScoreUpdate/{id}/{course}(id=${score.id.sid}, course=${score.id.course})}" class="btn btn-warning">修改成绩</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${ScoreList == null}">
+        <p class="alert alert-info">该学生未录入成绩信息</p>
+    </div>
+
+    <a href="/" class="btn btn-secondary">回到学生列表</a> <!-- 返回学生列表按钮 -->
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head>
+    <title>公共头部</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<header>
+    <!-- 公共头部内容 -->
+    <nav class="navbar navbar-light bg-light"   th:fragment="commonHeader">
+        <a th:href="@{/home/}">首页</a>
+        <!--        <a th:href="@{/logout}">退出</a>-->
+        <!-- 其他公共链接 -->
+        <a sec:authorize="isAnonymous()" th:href="@{/login_page}"   >登录</a>
+        <div> 学生管理系统 </div>
+        <!--如果已登录：用户名，注销-->
+        <div sec:authorize="isAuthenticated()">
+            <a class="item">
+                用户名：<span sec:authentication="name"> </span>
+            </a>
+            <a  class="item">
+                角色：<span sec:authentication="principal.authorities"> </span>
+            </a>
+        </div>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}"    >退出</a>
+    </nav>
+    <!--添加的内容-->
+
+    <!--侧边栏-->
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar" th:fragment="sidebar">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item"  sec:authorize="hasAuthority('USER') or hasAuthority('ADMIN')" >
+                    <a class="nav-link" th:href="@{/home/}">
+                        主页 <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+            <ul sec:authorize="hasAuthority('USER')" class="nav flex-column mb-2">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/HomeStuSearch}">
+                        学生信息查询
+                    </a>
+                    </li>
+            </ul>
+            <h6 sec:authorize="hasAuthority('ADMIN')"  class="sidebar-heading d-flex justify-content-between align-items-center px-3 my-4 mb-1 text-muted">
+                <span>管理模块</span>
+            </h6>
+            <ul sec:authorize="hasAuthority('ADMIN')" class="nav flex-column mb-2">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">
+                        学生管理
+                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/myuser/}">
+                        用户管理
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

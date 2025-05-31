@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .mytbl {
+            margin: auto;
+            text-align: center;
+            width: 600px;
+        }
+    </style>
+    <title>用户管理</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container my-2" th:insert="header :: commonHeader"></div>
+
+<div class="container my-2">
+    <div class="container-fluid">
+        <div class="row">
+            <!--侧边栏-->
+            <div th:replace="~{header :: sidebar }">...</div>
+
+            <div class="col-10">
+                <nav class="navbar navbar-light bg-light">
+                    <form id="query-form" action="/query" method="get">
+                        <h6 class="text-secondary"></h6>
+                        <input type="text" id="name-input" name="inpname" placeholder="姓名">
+                        <button type="button" class="btn btn-info btn-sm"onclick="queryStu()">搜索</button>
+                    </form>
+                    <hr>
+                    <script>
+                        function queryStu() {
+                            var stuName = document.getElementById("name-input").value;
+                            var url = "/Home/query" + encodeURIComponent(stuName);
+                            window.location.href = url;
+                        }
+                    </script>
+                </nav>
+
+                <table border="1" class="table table-striped table-responsive-md">
+                    <thead>
+                    <tr>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>专业</th>
+                        <th>查看学生成绩</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>   <!-- 表格内容 -->
+                    <tr th:each="stu : ${listStu}">
+                        <!--  <td>（表格数据单元格） -->
+                        <td th:text="${stu.sid}"></td>
+                        <td th:text="${stu.name}"></td>
+                        <td th:text="${stu.ssex}"></td>
+                        <td th:text="${stu.sclass}"></td>
+                        <td> <a th:href="@{/showStuScoreInHome/{id}(id=${stu.sid})}" class="btn btn-success">查看学生成绩</a> </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

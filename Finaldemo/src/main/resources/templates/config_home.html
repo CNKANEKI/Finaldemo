@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        p {margin-left: 20px}
+        .Grid {
+            background-color: lightgray;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 插入公共头部 -->
+<div class="container my-2" th:insert="header :: commonHeader"></div>
+
+<div class="container my-2">
+    <div class="container-fluid">
+        <div class="row">
+            <!--侧边栏-->
+            <div th:replace="~{header :: sidebar }">...</div>
+
+            <div class="col-10">
+                <div class="card my-2">
+                    <div class="card-body">
+                        <p><img th:src="@{/Picture.webp}"></p>
+                        <h2 class="Grid">学校官网</h2>
+                        <a href="http://www.whpu.edu.cn">武汉轻工大学</a>
+                        <h2 class="Grid">功能介绍</h2>
+                        <p>对学生系统进行规范管理</p>
+                        <p style="color: blue; margin-left: 20px">主要功能：查询个人成绩</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

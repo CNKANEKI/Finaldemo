@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta charset="ISO-8859-1">
+  <title>成绩管理</title>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+  <h2>新增成绩</h2>
+
+  <form action="#" th:action="@{/saveScore}" th:object="${score}" method="POST">
+    <input type="text" th:field="*{id.sid}" class="form-control mb-4 col-4" />
+    <br>
+    <input type="text" th:field="*{id.course}" placeholder="课程" class="form-control mb-4 col-4">
+    <br>
+    <input type="text" th:field="*{grade}" placeholder="成绩" class="form-control mb-4 col-4">
+    <br>
+    <button type="submit" class="btn btn-info col-2"> 保存</button>
+  </form>
+
+  <a th:href="@{/showStuScore/{id}(id=${score.id.sid})}"> 返回列表</a>
+</div>>
+</body>
+
+</html>

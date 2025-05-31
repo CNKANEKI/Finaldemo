@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="ISO-8859-1">
+    <title>用户注册</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>注册</h1>
+    <hr>
+    <h2>请填写注册信息</h2>
+    <form action="#" th:action="@{/register/adduser}" th:object="${user}" method="POST">
+        <div class="row">
+            <label class="col-1 mx-2 d-flex align-items-center"><p>用户名</p></label>
+            <input type="text" th:field="*{username}" placeholder="" class="form-control mb-4 col-4">
+        </div>
+        <div class="row">
+            <label class="col-1 mx-2 d-flex align-items-center"><p>密码</p></label>
+            <input type="text" th:field="*{password}" placeholder="" class="form-control mb-4 col-4">
+        </div>
+
+        <div class="row">
+            <label class="col-1 mx-2 d-flex align-items-center"><p>用户类型</p></label>
+            <input type="radio"   value="ADMIN" th:field="*{role}"  class="form-control mb-2 col-1"/>管理员
+            <input type="radio"   value="USER" th:field="*{role}"   class="form-control mb-2 col-1"/>用户
+        </div>
+        <button type="submit" class="btn btn-info col-2"> 保存</button>
+    </form>
+    <hr>
+</div>
+</body>
+</html>

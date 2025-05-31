@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<!-- 插入公共头部 -->
+<div class="container my-2" th:insert="header :: commonHeader"></div>
+
+<div class="container my-2">
+    <div class="container-fluid">
+        <div class="row">
+            <!--侧边栏-->
+            <div th:replace="~{header :: sidebar }">...</div>
+
+            <div class="col-10">
+                <div class="card my-2">
+                    <div class="card-body">
+                        <div class="container mt-4">
+                            <h1 class="text-center">学生成绩</h1>
+                            <div th:if="${ScoreList != null}">
+                                <h2>成绩信息</h2>
+                                <hr>
+                                <table class="table table-bordered table-striped">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th>课程</th>
+                                        <th>成绩</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="score : ${ScoreList}">
+                                        <td th:text="${score.id.course}">课程名称</td>
+                                        <td th:text="${score.grade}">分数</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div th:if="${ScoreList == null}">
+                                <p class="alert alert-info">该学生未录入成绩信息</p>
+                            </div>
+
+                            <a href="/HomeStuSearch" class="btn btn-secondary">返回查询</a>
+
+                        </div>
+
+                        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

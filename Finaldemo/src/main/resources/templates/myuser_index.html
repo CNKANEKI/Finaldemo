@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .mytbl {
+            margin: auto;
+            text-align: center;
+            width: 600px;
+        }
+    </style>
+    <title>用户管理</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container my-2" th:insert="header :: commonHeader"></div>
+
+<div class="container my-2">
+    <div class="container-fluid">
+        <div class="row">
+            <!--侧边栏-->
+            <div th:replace="~{header :: sidebar }">...</div>
+
+            <div class="col-10">
+                <table border="1" cellspacing="0" class="mytbl">
+                    <tr>
+                        <th>用户</th>
+                        <th>密码</th>
+                        <th>角色</th>
+                        <th>功能</th>
+                    </tr>
+                    <!--    itemStat叫做状态变量-->
+                    <tr th:each="item:${MyuserList}">
+                        <td th:text="${item.username}"></td>
+                        <td th:text="${item.password}"></td>
+                        <td th:text="${item.role}"></td>
+                        <td>
+                            <a th:href="@{/myuser/showUserForUpdate/{id}(id=${item.id})}" class="btn btn-primary">修改</a>
+                            <a th:href="@{/myuser/deleteUser/{id}(id=${item.id})}" class="btn btn-danger">删除</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
